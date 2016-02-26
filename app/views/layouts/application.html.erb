@@ -7,8 +7,35 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+<nav class="navbar navbar-light bg-faded navbar-fixed-top" >
+    <%= link_to "Blog App", root_path, class: "navbar-brand" %>
+    <ul class="nav navbar-nav">
+      <li class="nav-itmactive"><%= link_to "Authors", "#", class:"nav-link" %></li>
+    </ul>
+</nav>
 
-<%= yield %>
+<div class="container-fluid">
+  <% flash.each do |name, msg| %>
+  <div class="alert alert-<%=name %>">
+    <a href="#" class="close" data-dismiss="alert" &#215;></a>
+    <%= content_tag :div, msg, :id => "flash_#{name}" if msg.is_a?(String) %>
+  </div>
+      <% end %>
+</div>
+
+<div class="row">
+  <div class="col-md-10 col-md-offset-1">
+    <div class="col-md-8">
+        <div class="main-content">
+           <%= yield %>
+        </div>
+    </div>
+    <div class="col-md-4">
+      <%= yield :sidebar %>
+    </div>
+  </div>
+</div>
+
 
 </body>
 </html>
